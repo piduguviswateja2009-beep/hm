@@ -6,7 +6,7 @@ import { getCategories, getProducts } from "@/lib/catalog";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params; const categories = await getCategories(); const category = categories.find((item)=>item.slug===slug);
-  return { title: category?.seo_title ?? category?.name ?? "Product category", description: category?.seo_description ?? category?.description ?? undefined };
+  return { title: category?.seo_title ?? category?.name ?? "Product category", description: category?.seo_description ?? category?.description ?? undefined, ...(category ? { alternates: { canonical: `/products/categories/${category.slug}` } } : {}) };
 }
 
 export default async function ProductCategoryPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ q?: string }> }) {

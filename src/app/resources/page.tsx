@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getPublishedPosts } from "@/lib/catalog";
 
-export const metadata:Metadata={title:"Water treatment resources",description:"Articles and practical resources from HM Aqua Chem on water treatment components and projects."};
+export const metadata:Metadata={title:"Water treatment resources",description:"Articles and practical resources from HM Aqua Chem on water treatment components and projects.",alternates:{canonical:"/resources"}};
 
 export default async function ResourcesPage(){
   const posts=await getPublishedPosts();

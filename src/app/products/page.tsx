@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ProductList } from "@/components/catalog/product-list";
 import { getCategories, getProducts } from "@/lib/catalog";
 
-export const metadata: Metadata = { title: "Water Treatment Products", description: "Browse HM Aqua Chem water treatment components and request product information." };
+export const metadata: Metadata = { title: "Water Treatment Products", description: "Browse HM Aqua Chem water treatment components and request product information.", alternates: { canonical: "/products" } };
 
 export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ q?: string; category?: string }> }) {
   const params = await searchParams;

@@ -3,7 +3,27 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPublishedPostBySlug } from "@/lib/catalog";
 import { MarkdownContent } from "@/components/resources/markdown-content";
+import { JsonLd } from "@/components/seo/json-ld";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { publicEnv } from "@/lib/env";
 
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const post=await getPublishedPostBySlug(slug);return post?{title:post.seo_title??post.title,description:post.seo_description??post.excerpt??undefined}:{title:"Article"};}
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPublishedPostBySlug(slug);
+  return post ? { title: post.seo_title ?? post.title, description: post.seo_description ?? post.excerpt ?? undefined, alternates: { canonical: `/resources/${post.slug}` }, openGraph: { type: "article", title: post.seo_title ?? post.title, description: post.seo_description ?? post.excerpt ?? undefined, publishedTime: post.published_at ?? undefined } } : { title: "Article" };
+}
 
-export default async function ResourceArticlePage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const post=await getPublishedPostBySlug(slug);if(!post)notFound();return <article className="mx-auto max-w-4xl px-5 py-16 lg:px-8 lg:py-20"><Link href="/resources" className="text-sm font-semibold text-aqua">← All resources</Link><header className="mt-8"><p className="text-xs font-semibold uppercase tracking-[.16em] text-aqua">Water treatment guide</p><h1 className="mt-3 text-4xl font-semibold tracking-tight text-navy sm:text-5xl">{post.title}</h1>{post.excerpt&&<p className="mt-5 text-lg leading-8 text-muted">{post.excerpt}</p>}{post.published_at&&<p className="mt-5 text-xs text-muted">Published {new Intl.DateTimeFormat("en-IN",{dateStyle:"long",timeZone:"Asia/Kolkata"}).format(new Date(post.published_at))}</p>}</header><div className="mt-10 border-t border-line pt-10"><MarkdownContent content={post.content}/></div><div className="mt-14 rounded-3xl bg-navy p-8 text-white"><h2 className="text-2xl font-semibold">Have a water treatment question?</h2><p className="mt-2 text-sm leading-6 text-white/70">Share your application and water conditions with the team for a product or project discussion.</p><Link href="/contact" className="mt-5 inline-flex rounded-full bg-aqua px-5 py-3 text-sm font-bold text-navy">Ask HM Aqua Chem</Link></div></article>;}
+export default async function ResourceArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPublishedPostBySlug(slug);
+  if (!post) notFound();
+  const url = new URL(`/resources/${post.slug}`, publicEnv.NEXT_PUBLIC_SITE_URL).toString();
+  return <article className="mx-auto max-w-4xl px-5 py-16 lg:px-8 lg:py-20">
+    <JsonLd data={{ "@context": "https://schema.org", "@type": "Article", headline: post.title, description: post.seo_description ?? post.excerpt ?? undefined, datePublished: post.published_at ?? undefined, dateModified: post.updated_at, mainEntityOfPage: url, author: { "@type": "Organization", name: "HM Water Components Pvt. Ltd." }, publisher: { "@type": "Organization", name: "HM Water Components Pvt. Ltd.", url: publicEnv.NEXT_PUBLIC_SITE_URL } }} />
+    <BreadcrumbSchema items={[{ name: "Home", path: "/" }, { name: "Resources", path: "/resources" }, { name: post.title, path: `/resources/${post.slug}` }]} />
+    <Link href="/resources" className="text-sm font-semibold text-aqua">← All resources</Link>
+    <header className="mt-8"><p className="text-xs font-semibold uppercase tracking-[.16em] text-aqua">Water treatment guide</p><h1 className="mt-3 text-4xl font-semibold tracking-tight text-navy sm:text-5xl">{post.title}</h1>{post.excerpt && <p className="mt-5 text-lg leading-8 text-muted">{post.excerpt}</p>}{post.published_at && <p className="mt-5 text-xs text-muted">Published {new Intl.DateTimeFormat("en-IN", { dateStyle: "long", timeZone: "Asia/Kolkata" }).format(new Date(post.published_at))}</p>}</header>
+    <div className="mt-10 border-t border-line pt-10"><MarkdownContent content={post.content} /></div>
+    <div className="mt-14 rounded-3xl bg-navy p-8 text-white"><h2 className="text-2xl font-semibold">Have a water treatment question?</h2><p className="mt-2 text-sm leading-6 text-white/70">Share your application and water conditions with the team for a product or project discussion.</p><Link href="/contact" className="mt-5 inline-flex rounded-full bg-aqua px-5 py-3 text-sm font-bold text-navy">Ask HM Aqua Chem</Link></div>
+  </article>;
+}

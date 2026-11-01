@@ -45,3 +45,5 @@
 - Public product files require an active product and public document metadata, then use a short-lived signed URL.
 - The approved calculator is limited to daily hardness load expressed as CaCO₃ equivalent. It makes no softener size, capacity, dosing or treatment recommendation because no design capacities or product dosing specs were supplied.
 - Newsletter subscriptions use double opt-in, 24-hour confirmation links, hashed tokens, and explicit public-table privilege revocation. Newsletter campaign composition and delivery are not included; only subscriber collection and staff review are implemented.
+- The public business listing and Part A disagree on company address/contact details. Structured data therefore includes only Organization and WebSite identity; LocalBusiness address/telephone details are withheld until the owner confirms them.
+- Google Analytics is optional and loads only after explicit analytics consent. The selected analytics provider is GA4; leave `NEXT_PUBLIC_GA_MEASUREMENT_ID` blank to keep analytics and the consent prompt disabled.

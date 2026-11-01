@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getServices } from "@/lib/catalog";
 
-export const metadata: Metadata = { title: "Services", description: "Water treatment services and support offered by HM Aqua Chem." };
+export const metadata: Metadata = { title: "Services", description: "Water treatment services and support offered by HM Aqua Chem.", alternates: { canonical: "/services" } };
 
 export default async function ServicesPage() {
   const services = await getServices();

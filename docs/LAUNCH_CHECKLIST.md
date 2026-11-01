@@ -5,6 +5,8 @@
 - [ ] Provide approved logo, brand colors, fonts and product imagery.
 - [ ] Confirm public contact details, business hours, address and map pin.
 - [ ] Confirm the canonical domain, DNS access and required old-URL redirects.
+- [ ] Set `NEXT_PUBLIC_SITE_URL` to the verified production canonical URL (no trailing slash); test sitemap, robots and canonical metadata.
+- [ ] Resolve the public address/contact discrepancy and substantiate any public operating statistics before adding LocalBusiness metadata or marketing claims.
 - [ ] Verify all catalog details, claims, documents and product availability.
 - [ ] Approve legal copy, data retention and enquiry contact process.
 - [ ] Nominate invite-only admin users and notification recipients.
