@@ -24,6 +24,10 @@ Posts accept Markdown and remain drafts until published. Review links, product c
 
 Archiving hides content from the public site while preserving its database record. Confirm before archiving a live product, post, category, FAQ, testimonial, or client entry.
 
+## Newsletter
+
+The **Newsletter** screen is a staff-only view of addresses and their confirmation/unsubscribe status. Visitors must confirm by email before being subscribed. Subscribers can unsubscribe from a confirmation page reached from the email; crawler prefetching the link does not unsubscribe them. Newsletter delivery campaigns are not part of this release.
+
 ## Owner setup checklist
 
 - Configure the environment variables listed in `.env.example` in the deployment environment.

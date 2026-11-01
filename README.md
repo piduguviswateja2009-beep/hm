@@ -29,7 +29,9 @@ pnpm build
 
 Copy `.env.example` to `.env.local` and configure values as the corresponding integrations are implemented. `SUPABASE_SERVICE_ROLE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY` and `RATE_LIMIT_SECRET` are server-only. Never expose them to browser code or commit secrets.
 
-For quote/contact enquiries, configure the Supabase URL, service-role key, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ENQUIRY_TEAM_EMAIL`, and `ENQUIRY_FROM_EMAIL`. The sender must be verified with Resend before email delivery works. If email is unavailable, the database write still succeeds and the server records a generic delivery error without logging enquiry details.
+For quote/contact enquiries, configure the Supabase URL, service-role key, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ENQUIRY_TEAM_EMAIL`, and `ENQUIRY_FROM_EMAIL`. The sender must be verified with Resend before email delivery works. If email is unavailable, the database write still succeeds and the server records a generic delivery error without logging enquiry details. Newsletter confirmation uses the same Resend sender and Turnstile setup; public newsletter signups remain pending until the recipient confirms by email.
+
+Admin access is invite-only. An owner invites staff using Supabase Auth, then creates/activates each matching `profiles` row as described in [the admin guide](docs/ADMIN_GUIDE.md). Never enable public sign-up for the admin dashboard.
 
 ## Supabase database
 
@@ -54,6 +56,8 @@ Run database RLS tests against a local Supabase stack with Docker available:
 pnpm supabase start
 pnpm supabase test db
 ```
+
+The public resources area reads approved/published posts, FAQs and product documents from Supabase. The hardness-load estimator reports only an indicative CaCO₃-equivalent load; it does not size treatment equipment. Newsletter subscription is double opt-in; campaign authoring/delivery is not included.
 
 ## Deployment
 

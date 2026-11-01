@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { requireStaff } from "@/lib/supabase/staff";
 
-const nav=[{href:"/admin",label:"Overview"},{href:"/admin/enquiries",label:"Enquiries"},{href:"/admin/products",label:"Products"},{href:"/admin/categories",label:"Categories"},{href:"/admin/posts",label:"Posts"},{href:"/admin/faqs",label:"FAQs"},{href:"/admin/testimonials",label:"Testimonials"},{href:"/admin/clients",label:"Clients"},{href:"/admin/settings",label:"Site settings"}];
+const nav=[{href:"/admin",label:"Overview"},{href:"/admin/enquiries",label:"Enquiries"},{href:"/admin/products",label:"Products"},{href:"/admin/categories",label:"Categories"},{href:"/admin/posts",label:"Posts"},{href:"/admin/faqs",label:"FAQs"},{href:"/admin/testimonials",label:"Testimonials"},{href:"/admin/clients",label:"Clients"},{href:"/admin/newsletter",label:"Newsletter"},{href:"/admin/settings",label:"Site settings"}];
 
 export default async function AdminLayout({children}:{children:React.ReactNode}) {
   const {profile}=await requireStaff();

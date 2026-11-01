@@ -12,6 +12,16 @@ begin
   if has_table_privilege('authenticated', 'private.public_rate_limits', 'select') then
     raise exception 'authenticated clients can read private rate limits';
   end if;
+  if has_table_privilege('anon', 'public.newsletter_subscribers', 'select')
+     or has_table_privilege('anon', 'public.newsletter_subscribers', 'insert') then
+    raise exception 'anonymous clients have newsletter table privileges';
+  end if;
+  if has_table_privilege('authenticated', 'public.newsletter_subscribers', 'insert') then
+    raise exception 'authenticated clients can write newsletter subscribers directly';
+  end if;
+  if not has_table_privilege('service_role', 'public.newsletter_subscribers', 'insert') then
+    raise exception 'service_role cannot write newsletter subscribers';
+  end if;
   if has_function_privilege('anon', 'public.consume_public_rate_limit(text,timestamptz,integer)', 'execute') then
     raise exception 'anon can execute rate limiter';
   end if;
