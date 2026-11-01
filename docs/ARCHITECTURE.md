@@ -26,6 +26,10 @@ Published posts and FAQs are read through the public RLS policies. Post content 
 - Database access is governed by RLS policies in versioned SQL migrations.
 - Enquiry records and uploads are private; public clients must not query enquiry data.
 
+## End-to-end validation
+
+`pnpm test:e2e` starts a local Next.js dev server on port 3100 and runs Chromium flows for catalog search, enquiry confirmation (with the API mocked), invite-only admin login, SEO/security responses, and mobile navigation. The mocked enquiry flow validates browser behavior only; the Supabase RLS tests and an owner-approved staging smoke submission are still needed to validate persistence and email delivery.
+
 ## Phase sequence
 
 Database + RLS, public catalog, enquiry flow, admin, resources/growth, SEO/accessibility, then launch review. See the project brief for acceptance criteria.
