@@ -22,8 +22,12 @@ The site runs at `http://localhost:3000`. Public catalog pages can render withou
 ```bash
 pnpm lint
 pnpm typecheck
+pnpm test
 pnpm build
+pnpm test:e2e
 ```
+
+Playwright starts a local Next.js server on port 3100 and intercepts the enquiry API in its browser flow; it does not create real enquiries or require production credentials. CI installs Chromium before running these end-to-end checks.
 
 ## Environment variables
 
