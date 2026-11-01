@@ -29,3 +29,11 @@
 - The six audience groups explicitly named in the brief (apartments/residential, hospitals, hotels, industrial/manufacturing, commercial buildings and institutions) are seeded as active industries. Their detailed copy remains generic until confirmed.
 - No service offerings were confirmed. The Services page reads active service rows from Supabase and displays a confirmation message while none are active.
 - A contact form and direct contact channels are deferred to the enquiry phase because official email, phone and WhatsApp details are unconfirmed. Quote links currently lead to the Contact page.
+
+## Phase 4 implementation
+
+- The quote list stores only public product identifiers, names, slugs and quantities in the visitor's browser local storage; it does not store contact details.
+- Contact and quote submissions require at least one reply channel (email or phone), and both are optional individually.
+- The public endpoint requires configured Supabase service credentials. Production submissions fail closed if Turnstile is not configured; local development may run without Turnstile.
+- Email delivery is best-effort after the enquiry transaction commits. Missing or failed email configuration never discards the saved enquiry; delivery failures are logged without PII.
+- Rate limiting allows five requests per IP hash per minute. The hash is HMAC-protected with `RATE_LIMIT_SECRET` or the service-role key and only the hash is retained for up to one day.
