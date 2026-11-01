@@ -11,11 +11,7 @@ insert into public.categories (slug, name, description, sort_order, is_active) v
   ('water-treatment-components', 'Water Treatment Components', 'Water treatment plant and purifier component enquiries.', 70, true),
   ('anodes', 'Anodes', 'Anode enquiries for water treatment applications.', 80, true),
   ('zld-water-reuse', 'ZLD & Water Reuse', 'Zero liquid discharge and water reuse enquiries.', 90, true)
-on conflict (slug) do update set
-  name = excluded.name,
-  description = excluded.description,
-  sort_order = excluded.sort_order,
-  is_active = excluded.is_active;
+on conflict (slug) do nothing;
 
 insert into public.products (category_id, slug, name, brand, model, is_active) values
   ((select id from public.categories where slug = 'ro-antiscalants-chemicals'), 'hm-5010-active-ro-antiscalant', 'HM 5010 Active RO Antiscalant', 'HM', 'HM 5010', false),
@@ -37,12 +33,17 @@ insert into public.products (category_id, slug, name, brand, model, is_active) v
   ((select id from public.categories where slug = 'water-treatment-components'), 'water-treatment-plant-components', 'Water Treatment Plant & Purifier Components', null, null, false),
   ((select id from public.categories where slug = 'anodes'), 'titanium-anode-electro-chlorinator', 'Titanium Anode for Electro-chlorinator', null, null, false),
   ((select id from public.categories where slug = 'anodes'), 'cathodic-protection-anode', 'Cathodic Protection Anode', null, null, false)
-on conflict (slug) do update set
-  name = excluded.name,
-  brand = excluded.brand,
-  model = excluded.model,
-  is_active = excluded.is_active;
+on conflict (slug) do nothing;
 
 insert into public.services (slug, name, is_active) values
   ('zld-water-reuse-solutions', 'Zero Liquid Discharge / Water Reuse Solutions', false)
+on conflict (slug) do nothing;
+
+insert into public.industries (slug, name, is_active) values
+  ('apartments-residential', 'Apartments & Residential', true),
+  ('hospitals', 'Hospitals', true),
+  ('hotels', 'Hotels', true),
+  ('industrial-manufacturing', 'Industrial & Manufacturing', true),
+  ('commercial-buildings', 'Commercial Buildings', true),
+  ('institutions', 'Institutions', true)
 on conflict (slug) do nothing;
