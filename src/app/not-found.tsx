@@ -1,0 +1,3 @@
+import Link from "next/link";
+
+export default function NotFound(){return <section className="mx-auto max-w-3xl px-5 py-24 text-center"><p className="text-sm font-bold uppercase tracking-[.2em] text-aqua">404 · Page not found</p><h1 className="mt-4 text-4xl font-semibold tracking-tight text-navy">We couldn’t find that page.</h1><p className="mt-4 text-base leading-7 text-muted">The link may have changed or the page may no longer be published.</p><div className="mt-8 flex justify-center gap-3"><Link href="/" className="rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white">Go home</Link><Link href="/products" className="rounded-full border border-line px-5 py-3 text-sm font-semibold text-navy">Browse products</Link></div></section>;}

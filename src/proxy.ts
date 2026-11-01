@@ -4,6 +4,13 @@ import type { Database } from "@/../types/database.types";
 import { publicEnv } from "@/lib/env";
 
 export async function proxy(request: NextRequest) {
+  if (request.nextUrl.pathname === "/water-treatment-plants") {
+    const legacyTarget = request.nextUrl.clone();
+    legacyTarget.pathname = "/products";
+    legacyTarget.search = "";
+    return NextResponse.redirect(legacyTarget, 301);
+  }
+  if (!request.nextUrl.pathname.startsWith("/admin")) return NextResponse.next();
   const url=publicEnv.NEXT_PUBLIC_SUPABASE_URL;
   const key=publicEnv.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY||publicEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   const isLogin=request.nextUrl.pathname==="/admin/login";
@@ -30,4 +37,4 @@ export async function proxy(request: NextRequest) {
   return response;
 }
 
-export const config={matcher:["/admin/:path*"]};
+export const config={matcher:["/admin/:path*","/water-treatment-plants"]};

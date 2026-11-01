@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getIndustries } from "@/lib/catalog";
 
-export const metadata: Metadata = { title: "Industries", description: "Water treatment component enquiries for industrial, commercial and institutional settings." };
+export const metadata: Metadata = { title: "Industries", description: "Water treatment component enquiries for industrial, commercial and institutional settings.", alternates: { canonical: "/industries" } };
 
 export default async function IndustriesPage() {
   const industries = await getIndustries();

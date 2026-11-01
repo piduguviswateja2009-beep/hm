@@ -1,6 +1,13 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getIndustry } from "@/lib/catalog";
+import type { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const industry = await getIndustry(slug);
+  return industry ? { title: industry.seo_title ?? industry.name, description: industry.seo_description ?? industry.description ?? undefined, alternates: { canonical: `/industries/${industry.slug}` } } : { title: "Industry" };
+}
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; const industry = await getIndustry(slug);

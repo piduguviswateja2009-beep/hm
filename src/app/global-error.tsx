@@ -1,0 +1,4 @@
+"use client";
+import Link from "next/link";
+
+export default function GlobalError({reset}:{error:Error&{digest?:string};reset:()=>void}){return <html lang="en"><body className="bg-white font-sans text-slate-900"><main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 text-center"><p className="text-xs font-bold uppercase tracking-[.2em] text-teal-700">Something went wrong</p><h1 className="mt-4 text-4xl font-semibold tracking-tight">We couldn’t load this page.</h1><p className="mt-4 text-sm leading-6 text-slate-600">Please try again. If the problem continues, return to the home page and contact the team.</p><button onClick={()=>reset()} className="mt-7 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white">Try again</button><Link href="/" className="mt-4 text-sm font-semibold text-teal-800 underline">Go home</Link></main></body></html>;}
