@@ -750,6 +750,29 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      consume_public_rate_limit: {
+        Args: { p_key_hash: string; p_limit?: number; p_window_start: string }
+        Returns: boolean
+      }
+      create_public_enquiry: {
+        Args: {
+          p_city: string
+          p_company: string
+          p_email: string
+          p_items?: Json
+          p_message: string
+          p_name: string
+          p_phone: string
+          p_source_page: string
+          p_type: string
+          p_utm_campaign: string
+          p_utm_content: string
+          p_utm_medium: string
+          p_utm_source: string
+          p_utm_term: string
+        }
+        Returns: string
+      }
       search_products: {
         Args: { max_results?: number; search_query: string }
         Returns: {

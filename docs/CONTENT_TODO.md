@@ -9,6 +9,7 @@
 - Certifications, awards, leadership biography and years-of-experience claim.
 - Client names/logos and written display permission; verified testimonials and review permissions; approved case studies.
 - Approved team contacts, admin user identities, and enquiry notification recipients.
+- Confirm the team notification inbox and verified Resend sender domain/address; configure Resend and Cloudflare Turnstile keys in each deployment environment before public launch.
 - Approved educational content, datasheets/MSDS/brochures, calculators and any disclaimer text.
 - Confirm approved descriptions and details for each industry served and any services offered before publishing expanded pages.
 - Populate and verify the active catalog in Supabase, including product descriptions, specifications, packaging, applications, documents, images and availability. Product rows are intentionally inactive until this is complete.

@@ -15,7 +15,7 @@ Copy-Item .env.example .env.local
 pnpm dev
 ```
 
-The site runs at `http://localhost:3000`. The Phase 1 foundation does not require Supabase credentials to render its static pages.
+The site runs at `http://localhost:3000`. Public catalog pages can render without Supabase settings, but enquiry submission needs the server-side Supabase key. In production, configure both Turnstile keys so the form can pass the spam check.
 
 ## Checks
 
@@ -27,7 +27,9 @@ pnpm build
 
 ## Environment variables
 
-Copy `.env.example` to `.env.local` and configure values as the corresponding integrations are implemented. Never expose `SUPABASE_SERVICE_ROLE_KEY` to browser code or commit secrets.
+Copy `.env.example` to `.env.local` and configure values as the corresponding integrations are implemented. `SUPABASE_SERVICE_ROLE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY` and `RATE_LIMIT_SECRET` are server-only. Never expose them to browser code or commit secrets.
+
+For quote/contact enquiries, configure the Supabase URL, service-role key, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ENQUIRY_TEAM_EMAIL`, and `ENQUIRY_FROM_EMAIL`. The sender must be verified with Resend before email delivery works. If email is unavailable, the database write still succeeds and the server records a generic delivery error without logging enquiry details.
 
 ## Supabase database
 

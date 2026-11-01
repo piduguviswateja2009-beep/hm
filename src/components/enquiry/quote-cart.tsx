@@ -1,0 +1,12 @@
+"use client";
+
+import Link from "next/link";
+import { EnquiryForm } from "@/components/enquiry/enquiry-form";
+import { useEnquiryCart } from "@/components/enquiry/enquiry-cart";
+
+export function QuoteCart() {
+  const {items,hydrated,remove,setQuantity,clear}=useEnquiryCart();
+  if(!hydrated) return <p className="mt-8 text-sm text-muted" aria-live="polite">Loading your enquiry list…</p>;
+  if(!items.length) return <div className="mt-8 rounded-2xl border border-dashed border-line bg-white p-8 text-center"><h2 className="text-xl font-semibold text-navy">Your enquiry list is empty</h2><p className="mt-2 text-sm text-muted">Add products from the catalog and request information in one enquiry.</p><Link className="mt-5 inline-flex rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white" href="/products">Browse products</Link></div>;
+  return <div className="mt-8 grid gap-8 lg:grid-cols-[.9fr_1.1fr]"><section><div className="flex items-center justify-between"><h2 className="text-xl font-semibold text-navy">Selected products ({items.length})</h2><button type="button" onClick={clear} className="text-sm font-medium text-muted underline">Clear list</button></div><ul className="mt-4 divide-y divide-line rounded-2xl border border-line bg-white">{items.map((item)=><li key={item.productId} className="flex flex-wrap items-center justify-between gap-4 p-5"><div className="min-w-40 flex-1"><Link href={`/products/${item.slug}`} className="font-semibold text-navy hover:text-aqua">{item.name}</Link><label className="mt-3 flex items-center gap-2 text-xs text-muted">Quantity<input type="number" min={1} max={100000} step={1} value={item.quantity} onChange={(e)=>{const value=Number(e.target.value);if(Number.isInteger(value)&&value>=1&&value<=100000)setQuantity(item.productId,value);}} className="w-24 rounded-lg border border-line px-3 py-2 text-sm text-navy" /></label></div><button type="button" onClick={()=>remove(item.productId)} className="text-sm font-medium text-muted underline">Remove</button></li>)}</ul></section><section className="rounded-3xl bg-surface p-6 sm:p-8"><h2 className="text-xl font-semibold text-navy">Request a quote</h2><p className="mt-2 mb-6 text-sm text-muted">Share your requirements and the team can follow up about availability and pricing.</p><EnquiryForm type="quote" items={items.map((item)=>({productId:item.productId,quantity:item.quantity}))} submitLabel="Send quote request" onSuccess={clear} /></section></div>;
+}
