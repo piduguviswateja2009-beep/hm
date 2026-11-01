@@ -22,3 +22,10 @@
 - Use Geist through `next/font` until brand typography is supplied.
 - Use CSS-drawn water motifs in the foundation rather than unverified product photography.
 - Do not publish contact details or certifications until verified.
+
+## Phase 3 implementation
+
+- Catalog categories and products are read from Supabase through the public anonymous client. Product rows remain inactive until the owner verifies them, so public listing and search pages intentionally show a verification state today.
+- The six audience groups explicitly named in the brief (apartments/residential, hospitals, hotels, industrial/manufacturing, commercial buildings and institutions) are seeded as active industries. Their detailed copy remains generic until confirmed.
+- No service offerings were confirmed. The Services page reads active service rows from Supabase and displays a confirmation message while none are active.
+- A contact form and direct contact channels are deferred to the enquiry phase because official email, phone and WhatsApp details are unconfirmed. Quote links currently lead to the Contact page.

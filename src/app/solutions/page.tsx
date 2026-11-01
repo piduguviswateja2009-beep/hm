@@ -1,0 +1,8 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = { title: "Water Reuse & ZLD", description: "Explore water reuse and zero liquid discharge enquiries with HM Aqua Chem." };
+
+export default function SolutionsPage() {
+  return <section className="mx-auto max-w-6xl px-5 py-16 lg:px-8 lg:py-20"><p className="text-xs font-bold uppercase tracking-[.2em] text-aqua">Solutions</p><h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-tight text-navy sm:text-5xl">Water filtration, reuse and ZLD enquiries.</h1><p className="mt-5 max-w-3xl text-base leading-7 text-muted">Water reuse and Zero Liquid Discharge are areas of focus listed in the company brief. Project scope and engineering capabilities need confirmation before we describe a specific solution.</p><div className="mt-10 grid gap-5 md:grid-cols-2"><article className="rounded-2xl border border-line bg-white p-7"><h2 className="text-xl font-semibold text-navy">Water reuse</h2><p className="mt-3 text-sm leading-6 text-muted">Discuss your application, source water and reuse objectives with the team.</p></article><article className="rounded-2xl border border-line bg-white p-7"><h2 className="text-xl font-semibold text-navy">Zero Liquid Discharge</h2><p className="mt-3 text-sm leading-6 text-muted">Share your project context so the team can confirm whether the required products and support are available.</p></article></div><Link href="/contact" className="mt-8 inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-semibold text-white">Discuss a project</Link></section>;
+}

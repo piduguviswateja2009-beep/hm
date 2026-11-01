@@ -2,9 +2,9 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, Droplets, Factory, FlaskConical, Waves } from "lucide-react";
 
 const categories = [
-  { icon: FlaskConical, title: "RO chemicals", copy: "Antiscalants and cleaning chemicals for reverse osmosis systems.", href: "/products?category=ro-chemicals", tag: "01" },
-  { icon: Waves, title: "Water softeners", copy: "Softening options for residential, commercial and institutional use.", href: "/products?category=softeners", tag: "02" },
-  { icon: Droplets, title: "RO plants & membranes", copy: "Treatment equipment and components for water plant projects.", href: "/products?category=ro-plants", tag: "03" },
+  { icon: FlaskConical, title: "RO chemicals", copy: "Antiscalants and cleaning chemicals for reverse osmosis systems.", href: "/products/categories/ro-antiscalants-chemicals", tag: "01" },
+  { icon: Waves, title: "Water softeners", copy: "Softening options for residential, commercial and institutional use.", href: "/products/categories/water-softeners", tag: "02" },
+  { icon: Droplets, title: "RO plants & membranes", copy: "Treatment equipment and components for water plant projects.", href: "/products/categories/ro-plants", tag: "03" },
   { icon: Factory, title: "Filtration & ZLD", copy: "Filtration, reuse and zero liquid discharge component enquiries.", href: "/solutions", tag: "04" },
 ];
 

@@ -3,9 +3,10 @@ import { ArrowUpRight, Menu, Waves } from "lucide-react";
 
 const links = [
   { href: "/products", label: "Products" },
-  { href: "/solutions", label: "Solutions" },
+  { href: "/industries", label: "Industries" },
+  { href: "/services", label: "Services" },
   { href: "/about", label: "About us" },
-  { href: "/resources", label: "Resources" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
