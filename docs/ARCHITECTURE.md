@@ -16,6 +16,8 @@ The HM Aqua Chem project is `bmkiqdzacbsjqcyyoeue` in `ap-south-1`. Phase 2 crea
 
 The home page and public informational pages are server components. Product catalog pages read active content from Supabase; product data must not be embedded in UI components. The invite-only admin uses `@supabase/ssr`, cookie-backed sessions, `auth.getClaims()` in the Next.js 16 proxy, and an active `profiles` role check in protected server layouts and actions. All admin mutations use the authenticated staff client and RLS; the service-role key is not used by admin pages. Product assets are stored in the managed `public-media` and `documents` buckets with validated formats and metadata rows. The enquiry CRM shows staff-only data, status/audit updates, assignment, internal notes, search over its latest 100 records, and a bounded CSV export.
 
+Published posts and FAQs are read through the public RLS policies. Post content is rendered as a safe Markdown subset using React text nodes; embedded HTML is not executed. Public product documents are disclosed only when their metadata and active product pass RLS, then served through short-lived signed URLs. The hardness-load estimator computes only daily CaCO3-equivalent load and explicitly avoids sizing recommendations. Newsletter subscription uses server-only service-role writes, rate limiting, Turnstile, honeypot, double opt-in, hashed one-time tokens, and same-origin confirmation/unsubscribe POSTs. Only the token hashes are stored; raw tokens are emailed and never logged.
+
 ## Security boundaries
 
 - Public Supabase URL and anonymous key may be used in browser-safe clients.

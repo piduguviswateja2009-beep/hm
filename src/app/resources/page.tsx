@@ -1,0 +1,13 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { getPublishedPosts } from "@/lib/catalog";
+
+export const metadata:Metadata={title:"Water treatment resources",description:"Articles and practical resources from HM Aqua Chem on water treatment components and projects."};
+
+export default async function ResourcesPage(){
+  const posts=await getPublishedPosts();
+  return <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20"><p className="text-xs font-bold uppercase tracking-[.2em] text-aqua">Knowledge hub</p><div className="mt-3 flex flex-wrap items-end justify-between gap-5"><div><h1 className="text-4xl font-semibold tracking-tight text-navy sm:text-5xl">Water treatment resources.</h1><p className="mt-5 max-w-2xl text-base leading-7 text-muted">Guides and updates published by the HM Aqua Chem team. Product recommendations depend on your water analysis and application.</p></div><div className="flex flex-wrap gap-3"><Link href="/resources/faqs" className="rounded-full border border-line bg-white px-5 py-3 text-sm font-semibold text-navy">FAQs</Link><Link href="/calculators/softener-load" className="rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white">Hardness-load estimator</Link></div></div>
+    {posts.length?<div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{posts.map((post)=><article key={post.id} className="rounded-3xl border border-line bg-white p-6"><p className="text-xs text-muted">{post.published_at?new Intl.DateTimeFormat("en-IN",{dateStyle:"medium",timeZone:"Asia/Kolkata"}).format(new Date(post.published_at)):""}</p><h2 className="mt-3 text-xl font-semibold text-navy"><Link href={`/resources/${post.slug}`} className="hover:text-aqua">{post.title}</Link></h2><p className="mt-3 text-sm leading-6 text-muted">{post.excerpt??"Read this water treatment guide."}</p><Link href={`/resources/${post.slug}`} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-navy">Read article <ArrowRight size={16}/></Link></article>)}</div>:<div className="mt-10 rounded-3xl border border-dashed border-line bg-white p-8"><h2 className="text-xl font-semibold text-navy">Articles are being prepared.</h2><p className="mt-2 max-w-xl text-sm leading-6 text-muted">The team will publish reviewed guidance here. In the meantime, browse the FAQs or ask us about your water treatment requirements.</p><div className="mt-5 flex flex-wrap gap-4"><Link href="/resources/faqs" className="text-sm font-semibold text-aqua">Browse FAQs</Link><Link href="/contact" className="text-sm font-semibold text-aqua">Contact the team</Link></div></div>}
+  </section>;
+}

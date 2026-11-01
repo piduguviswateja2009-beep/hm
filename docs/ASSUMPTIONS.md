@@ -37,3 +37,11 @@
 - The public endpoint requires configured Supabase service credentials. Production submissions fail closed if Turnstile is not configured; local development may run without Turnstile.
 - Email delivery is best-effort after the enquiry transaction commits. Missing or failed email configuration never discards the saved enquiry; delivery failures are logged without PII.
 - Rate limiting allows five requests per IP hash per minute. The hash is HMAC-protected with `RATE_LIMIT_SECRET` or the service-role key and only the hash is retained for up to one day.
+
+## Phase 6 implementation
+
+- No article, FAQ, testimonial, client logo or download has been seeded as factual content. Public resource pages show clear empty states until staff publish approved content.
+- The site renders a small safe Markdown subset for posts; raw HTML is displayed as text and never executed.
+- Public product files require an active product and public document metadata, then use a short-lived signed URL.
+- The approved calculator is limited to daily hardness load expressed as CaCO₃ equivalent. It makes no softener size, capacity, dosing or treatment recommendation because no design capacities or product dosing specs were supplied.
+- Newsletter subscriptions use double opt-in, 24-hour confirmation links, hashed tokens, and explicit public-table privilege revocation. Newsletter campaign composition and delivery are not included; only subscriber collection and staff review are implemented.

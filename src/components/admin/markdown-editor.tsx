@@ -1,0 +1,6 @@
+"use client";
+
+import { useState } from "react";
+import { MarkdownContent } from "@/components/resources/markdown-content";
+
+export function MarkdownEditor({defaultValue}:{defaultValue:string}){const [preview,setPreview]=useState(false);const [content,setContent]=useState(defaultValue);return <div className="mt-1 overflow-hidden rounded-xl border border-line"><div className="flex items-center gap-2 border-b border-line bg-surface px-3 py-2"><button type="button" aria-pressed={!preview} onClick={()=>setPreview(false)} className={`rounded-md px-3 py-1.5 text-xs font-semibold ${!preview?"bg-white text-navy":"text-muted"}`}>Write</button><button type="button" aria-pressed={preview} onClick={()=>setPreview(true)} className={`rounded-md px-3 py-1.5 text-xs font-semibold ${preview?"bg-white text-navy":"text-muted"}`}>Preview</button><span className="ml-auto text-[11px] text-muted">Safe Markdown subset</span></div>{preview?<div className="min-h-72 p-4"><input type="hidden" name="content" value={content}/><MarkdownContent content={content}/></div>:<textarea name="content" value={content} onChange={(event)=>setContent(event.target.value)} maxLength={50000} rows={14} className="w-full resize-y border-0 bg-white p-4 font-mono text-xs leading-6 outline-none"/>}</div>;}

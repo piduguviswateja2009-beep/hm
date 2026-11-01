@@ -19,15 +19,23 @@ declare
   visible_rows bigint;
   changed_rows bigint;
 begin
-  execute 'select count(*) from public.enquiries' into visible_rows;
-  if visible_rows <> 0 then
-    raise exception 'RLS test failed: anon could read enquiries';
-  end if;
+  begin
+    execute 'select count(*) from public.enquiries' into visible_rows;
+    if visible_rows <> 0 then
+      raise exception 'RLS test failed: anon could read enquiries';
+    end if;
+  exception when insufficient_privilege then
+    null;
+  end;
 
-  execute 'select count(*) from public.newsletter_subscribers' into visible_rows;
-  if visible_rows <> 0 then
-    raise exception 'RLS test failed: anon could read newsletter subscribers';
-  end if;
+  begin
+    execute 'select count(*) from public.newsletter_subscribers' into visible_rows;
+    if visible_rows <> 0 then
+      raise exception 'RLS test failed: anon could read newsletter subscribers';
+    end if;
+  exception when insufficient_privilege then
+    null;
+  end;
 
   begin
     execute 'insert into public.products (category_id, slug, name) values (gen_random_uuid(), ''rls-test'', ''RLS Test'')';
