@@ -5,10 +5,12 @@
 - `src/app/` contains App Router routes and global design tokens.
 - `src/components/layout/` contains the site-wide header and footer.
 - `src/lib/` is reserved for validated environment configuration and shared utilities.
-- `supabase/migrations/` will own all database schema changes; `supabase/seed.sql` will hold non-secret seed data.
-- `types/` will contain generated Supabase TypeScript types.
+- `supabase/migrations/` owns all database schema changes; `supabase/seed.sql` holds non-sensitive catalog seed data.
+- `types/database.types.ts` is generated from the HM Aqua Chem Supabase project.
 
-The current home page is a static server component. Product catalog, forms, authentication and persistence are added in later phases. Public pages must read catalog content from Supabase when that integration is introduced; product data must not be embedded in UI components.
+The HM Aqua Chem project is `bmkiqdzacbsjqcyyoeue` in `ap-south-1`. Phase 2 created the catalog, content, enquiry, CRM and settings tables. Every public table has RLS enabled. Catalog rows are read publicly only when active; enquiries, enquiry items, events and newsletter subscribers have no anonymous read or write path. Public forms will write through validated server routes using the server-only service role.
+
+The current home page is a static server component. Product catalog, forms, authentication and persistence in public pages are added in later phases. Public pages must read catalog content from Supabase; product data must not be embedded in UI components.
 
 ## Security boundaries
 

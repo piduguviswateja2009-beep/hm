@@ -11,7 +11,8 @@
 
 ## Operations (complete in later phases)
 
-- [ ] Create Supabase project and apply committed migrations.
+- [x] Create the HM Aqua Chem Supabase project in `ap-south-1`; apply the committed migrations and safe seed data.
+- [ ] Disable public Auth sign-up and invite the approved initial admin users when the admin phase is implemented.
 - [ ] Configure production environment variables in Vercel; verify service role secret is server-side only.
 - [ ] Configure transactional email, sender-domain authentication and Turnstile.
 - [ ] Configure analytics and consent settings if enabled.
